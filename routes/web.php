@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -45,5 +46,12 @@ Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBackHisto
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
     Route::get('profile',[UserController::class,'profile'])->name('user.profile');
     Route::get('settings',[UserController::class,'settings'])->name('user.settings');
+    
+});
+
+Route::group(['prefix'=>'teacher', 'middleware'=>['isTeacher','auth','PreventBackHistory']], function(){
+    Route::get('dashboard',[TeacherController::class,'index'])->name('teacher.dashboard');
+    Route::get('profile',[TeacherController::class,'profile'])->name('teacher.profile');
+    Route::get('settings',[TeacherController::class,'settings'])->name('teacher.settings');
     
 });
